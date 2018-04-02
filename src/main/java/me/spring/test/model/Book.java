@@ -20,7 +20,9 @@ public class Book {
     private String title;
     @Getter @Setter
     private String isbn;
+
     @Getter @Setter
+    @OneToOne
     private Publisher publisher;
 
     @Getter @Setter
