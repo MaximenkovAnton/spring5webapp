@@ -29,10 +29,10 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>{
     }
 
     private Publisher initPublisherByFirstNameAndLastName(String firstName, String lastName) {
-        Publisher harper = new Publisher();
-        harper.setFirstName(firstName);
-        harper.setLastName(lastName);
-        return harper;
+        Publisher publisher = new Publisher();
+        publisher.setFirstName(firstName);
+        publisher.setLastName(lastName);
+        return publisher;
     }
 
     private void initRod() {
@@ -53,8 +53,8 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>{
 
     private void saveInRepositories(Author author, Book book, Publisher publisher){
         authorRepository.save(author);
-        bookRepository.save(book);
         publisherRepository.save(publisher);
+        bookRepository.save(book);
     }
 
     @Override
