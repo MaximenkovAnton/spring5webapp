@@ -3,8 +3,10 @@ package me.spring.test.bootstrap;
 import lombok.AllArgsConstructor;
 import me.spring.test.model.Author;
 import me.spring.test.model.Book;
+import me.spring.test.model.Publisher;
 import me.spring.test.repositories.AuthorRepository;
 import me.spring.test.repositories.BookRepository;
+import me.spring.test.repositories.PublisherRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -14,28 +16,45 @@ import org.springframework.stereotype.Component;
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>{
     private AuthorRepository authorRepository;
     private BookRepository bookRepository;
+    private PublisherRepository publisherRepository;
 
     private void initEric() {
         Author eric = new Author("Eric", "Evans");
-        Book ddd = new Book("Domain Driven Design", "1234", "Harper Collins");
+        Publisher harper = initPublisherByFirstNameAndLastName("Harper", "Collins");
+        Book ddd = new Book("Domain Driven Design", "1234", harper);
         eric.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
 
-        saveInRepositories(eric, ddd);
+        saveInRepositories(eric, ddd, harper);
+    }
+
+    private Publisher initPublisherByFirstNameAndLastName(String firstName, String lastName) {
+        Publisher harper = new Publisher();
+        harper.setFirstName(firstName);
+        harper.setLastName(lastName);
+        return harper;
     }
 
     private void initRod() {
         Author rod = new Author("Rod", "Johnson");
-        Book noEJB = new Book("J2EE development without EJB", "23444", "Worx");
+        Publisher worx = initPublisherByNickName("Worx");
+        Book noEJB = new Book("J2EE development without EJB", "23444", worx);
         rod.getBooks().add(noEJB);
         noEJB.getAuthors().add(rod);
 
-        saveInRepositories(rod, noEJB);
+        saveInRepositories(rod, noEJB, worx);
     }
 
-    private void saveInRepositories(Author author, Book book){
+    private Publisher initPublisherByNickName(String nick) {
+        Publisher publisher = new Publisher();
+        publisher.setNick(nick);
+        return publisher;
+    }
+
+    private void saveInRepositories(Author author, Book book, Publisher publisher){
         authorRepository.save(author);
         bookRepository.save(book);
+        publisherRepository.save(publisher);
     }
 
     @Override
