@@ -21,7 +21,7 @@ public class Book {
     @Getter @Setter
     private String isbn;
     @Getter @Setter
-    private String publisher;
+    private Publisher publisher;
 
     @Getter @Setter
     @ManyToMany
@@ -29,7 +29,7 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
 
-    public Book(String title, String isbn, String publisher) {
+    public Book(String title, String isbn, Publisher publisher) {
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
