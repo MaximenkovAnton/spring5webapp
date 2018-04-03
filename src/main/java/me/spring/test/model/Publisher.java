@@ -1,5 +1,6 @@
 package me.spring.test.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@EqualsAndHashCode(of = "id")
 public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
