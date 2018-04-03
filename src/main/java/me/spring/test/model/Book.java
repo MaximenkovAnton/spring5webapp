@@ -1,6 +1,7 @@
 package me.spring.test.model;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,22 +10,23 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @EqualsAndHashCode(of = "id")
 @Entity
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String title;
-    private String isbn;
+    Long id;
+    String title;
+    String isbn;
 
     @OneToOne
-    private Publisher publisher;
+    Publisher publisher;
 
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Author> authors = new HashSet<>();
+    Set<Author> authors = new HashSet<>();
 
     public Book(String title, String isbn, Publisher publisher) {
         this.title = title;

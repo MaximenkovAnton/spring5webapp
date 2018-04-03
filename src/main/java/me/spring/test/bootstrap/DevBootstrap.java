@@ -1,6 +1,8 @@
 package me.spring.test.bootstrap;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import me.spring.test.model.Author;
 import me.spring.test.model.Book;
 import me.spring.test.model.Publisher;
@@ -13,10 +15,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>{
-    private AuthorRepository authorRepository;
-    private BookRepository bookRepository;
-    private PublisherRepository publisherRepository;
+    AuthorRepository authorRepository;
+    BookRepository bookRepository;
+    PublisherRepository publisherRepository;
 
     private void initEric() {
         Author eric = new Author("Eric", "Evans");
