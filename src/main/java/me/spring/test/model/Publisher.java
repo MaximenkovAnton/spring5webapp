@@ -20,8 +20,8 @@ public class Publisher {
     private String nick;
     private String address;
 
-    public String introduce(){
-        if(hasFirstOrLastName())
+    public String introduce() {
+        if (hasFirstOrLastName())
             return introduceByRealName();
         return introduceByNick();
     }
@@ -36,9 +36,9 @@ public class Publisher {
 
     private String introduceByRealName() {
         String name = "";
-        if(firstName != null) name = firstName;
-        if(lastName != null){
-            if(!name.isEmpty()) name = name.concat(" ");
+        if (firstName != null) name = firstName;
+        if (lastName != null) {
+            if (!name.isEmpty()) name = name.concat(" ");
             name = name.concat(lastName);
         }
         return name;
