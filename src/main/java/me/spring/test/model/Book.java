@@ -8,24 +8,19 @@ import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Data
 @EqualsAndHashCode(of = "id")
 @Entity
 public class Book {
-    @Getter @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Getter @Setter
     private String title;
-    @Getter @Setter
     private String isbn;
 
-    @Getter @Setter
     @OneToOne
     private Publisher publisher;
 
-    @Getter @Setter
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))

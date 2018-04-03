@@ -6,22 +6,18 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @EqualsAndHashCode(of = "id")
 @Entity
 public class Author {
-    @Getter @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Getter @Setter
     private String firstName;
-    @Getter @Setter
     private String lastName;
 
-    @Getter @Setter
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
 
